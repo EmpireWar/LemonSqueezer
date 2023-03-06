@@ -1,6 +1,7 @@
 name: LemonSqueezer
 version: '${version}'
-main: org.empirewar.lemonsqueezer.Lemonsqueezer
+main: org.empirewar.lemonsqueezer.LemonSqueezer
 api-version: 1.19
 description: Lemons for all!
 website: https://www.empirewar.org
+depend: ["LemonadeStand"]
