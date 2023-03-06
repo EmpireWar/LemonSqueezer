@@ -34,8 +34,9 @@ public final class LemonSqueezer extends JavaPlugin implements Listener {
     @EventHandler
     public void onShop(KoFiTransactionEvent event) {
         final ShopOrder shopOrder = event.getShopOrder();
+        final String type = shopOrder.getType();
 
-        if (shopOrder.getShopItems() != null) {
+        if (shopOrder.getShopItems() != null && type.equals("Shop Order")) {
             for (ShopItem shopItem : shopOrder.getShopItems()) {
                 final String code = shopItem.getDirectLinkCode();
                 List<String> commands = getConfig().getStringList("purchase.shop." + code);
