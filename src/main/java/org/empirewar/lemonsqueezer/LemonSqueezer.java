@@ -21,8 +21,9 @@ public final class LemonSqueezer extends JavaPlugin implements Listener {
     public void onEnable() {
         saveDefaultConfig();
         Bukkit.getPluginManager().registerEvents(this, this);
-        VARIABLE_MAPPINGS.put("player", (event) -> event.getPlayer().getName());
+        VARIABLE_MAPPINGS.put("player", event -> event.getPlayer().getName());
         VARIABLE_MAPPINGS.put("amount", event -> String.valueOf(event.getShopOrder().getAmount()));
+        VARIABLE_MAPPINGS.put("tier", event -> event.getShopOrder().getTierName());
     }
 
     @Override
@@ -33,16 +34,30 @@ public final class LemonSqueezer extends JavaPlugin implements Listener {
     @EventHandler
     public void onShop(KoFiTransactionEvent event) {
         final ShopOrder shopOrder = event.getShopOrder();
-        for (ShopItem shopItem : shopOrder.getShopItems()) {
-            final String code = shopItem.getDirectLinkCode();
-            List<String> commands = getConfig().getStringList("purchase.shop." + code);
-            for (int i = 0; i < shopItem.getQuantity(); i++) {
-                processCommands(event, commands);
+
+        if (shopOrder.getShopItems() != null) {
+            for (ShopItem shopItem : shopOrder.getShopItems()) {
+                final String code = shopItem.getDirectLinkCode();
+                List<String> commands = getConfig().getStringList("purchase.shop." + code);
+                for (int i = 0; i < shopItem.getQuantity(); i++) {
+                    processCommands(event, commands);
+                }
             }
+            return;
         }
 
-        final boolean subscriptionPayment = shopOrder.isSubscriptionPayment();
-        //todo: subscriptions
+        // If they didn't buy any shop items, check if they bought a membership tier.
+        final String tierName = shopOrder.getTierName();
+        if (tierName != null) {
+            // Is this the first subscription? If so, we want the initial command set, otherwise the subsequent.
+            String subscriptionType = shopOrder.isFirstSubscriptionPayment() ? "initial" : "subsequent";
+            List<String> commands = getConfig().getStringList("purchase.membership." + tierName + "." + subscriptionType);
+            processCommands(event, commands);
+            return;
+        }
+
+        // Otherwise, this is a loving donation.
+        processCommands(event, getConfig().getStringList("purchase.donation"));
     }
 
     private void processCommands(KoFiTransactionEvent event, List<String> commandList) {

@@ -5,3 +5,10 @@ purchase:
     code2:
       - "say {player} donated {amount}!"
   membership:
+    Bronze:
+      initial:
+        - "say {player} bought membership {tier}!"
+      subsequent:
+        - "say {player} bought membership {tier} again!"
+  donation:
+    - "say {player} donated {amount} lovingly!"
