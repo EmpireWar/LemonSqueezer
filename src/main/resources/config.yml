@@ -1,3 +1,7 @@
 purchase:
-  commands:
-    - "donoradmin addgold {amount} {player}"
+  shop:
+    code1:
+      - "say {player} donated {amount}!"
+    code2:
+      - "say {player} donated {amount}!"
+  membership:
