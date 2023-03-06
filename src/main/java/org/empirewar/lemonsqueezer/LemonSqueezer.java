@@ -65,7 +65,8 @@ public final class LemonSqueezer extends JavaPlugin implements Listener {
             for (String key : VARIABLE_MAPPINGS.keySet()) {
                 String varialised = "{" + key + "}";
                 final Function<KoFiTransactionEvent, String> function = VARIABLE_MAPPINGS.get(key);
-                command = command.replace(varialised, function.apply(event));
+                final String apply = function.apply(event);
+                command = command.replace(varialised, apply == null ? "null" : apply);
             }
 
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command);
