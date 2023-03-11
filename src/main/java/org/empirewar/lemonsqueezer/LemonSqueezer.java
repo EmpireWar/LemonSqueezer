@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.empirewar.lemonadestand.LemonadeStand;
 import org.empirewar.lemonadestand.event.KoFiTransactionEvent;
 import org.empirewar.lemonadestand.kofi.ShopItem;
 import org.empirewar.lemonadestand.kofi.ShopOrder;
@@ -39,6 +40,7 @@ public final class LemonSqueezer extends JavaPlugin implements Listener {
         if (shopOrder.getShopItems() != null && type.equals("Shop Order")) {
             for (ShopItem shopItem : shopOrder.getShopItems()) {
                 final String code = shopItem.getDirectLinkCode();
+                LemonadeStand.get().getTransactionLogger().info("Processing shop order item with code '" + code + "'.");
                 List<String> commands = getConfig().getStringList("purchase.shop." + code);
                 for (int i = 0; i < shopItem.getQuantity(); i++) {
                     processCommands(event, commands);
@@ -52,12 +54,14 @@ public final class LemonSqueezer extends JavaPlugin implements Listener {
         if (tierName != null) {
             // Is this the first subscription? If so, we want the initial command set, otherwise the subsequent.
             String subscriptionType = shopOrder.isFirstSubscriptionPayment() ? "initial" : "subsequent";
+            LemonadeStand.get().getTransactionLogger().info("Processing subscription for tier '" + tierName + "' of type '" + subscriptionType + "'.");
             List<String> commands = getConfig().getStringList("purchase.membership." + tierName + "." + subscriptionType);
             processCommands(event, commands);
             return;
         }
 
         // Otherwise, this is a loving donation.
+        LemonadeStand.get().getTransactionLogger().info("Processing normal donation.");
         processCommands(event, getConfig().getStringList("purchase.donation"));
     }
 
@@ -70,6 +74,7 @@ public final class LemonSqueezer extends JavaPlugin implements Listener {
                 command = command.replace(varialised, apply == null ? "null" : apply);
             }
 
+            LemonadeStand.get().getTransactionLogger().info("Processing command '" + command + "'.");
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command);
         }
     }
