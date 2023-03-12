@@ -6,15 +6,7 @@ plugins {
 repositories {
     mavenCentral()
     maven("https://papermc.io/repo/repository/maven-public/")
-    maven("https://repo.convallyria.com/empirewar") { // Treaty and others
-        credentials { // This is read only so it doesn't matter
-            username = "empirewar"
-            password = "sGjUMQrfCUto7oxx2w+jB8ps0kUJPp89RA6ynpuDnFN7Mkr7Q/3u154GVFy6fxrP"
-        }
-        authentication {
-            create<BasicAuthentication>("basic")
-        }
-    }
+    maven("https://repo.convallyria.com/snapshots")
 }
 
 dependencies {
