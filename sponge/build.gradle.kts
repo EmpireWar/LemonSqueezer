@@ -18,7 +18,7 @@ sponge {
         version("1.0.1-SNAPSHOT")
     }
     plugin("lemonsqueezer") {
-        displayName("LemonSqueezerSponge")
+        displayName("LemonSqueezer")
         entrypoint("org.empirewar.lemonsqueezer.sponge.LemonSqueezerSponge")
         description("Lemons for all!")
         license("MIT")

@@ -1,3 +1,5 @@
 package org.empirewar.lemonsqueezer;
 
-public class LemonSqueezer {}
+public interface LemonSqueezer {
+
+}
