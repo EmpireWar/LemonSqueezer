@@ -1,4 +1,3 @@
 package org.empirewar.lemonsqueezer;
 
-public class LemonSqueezer {
-}
+public class LemonSqueezer {}
