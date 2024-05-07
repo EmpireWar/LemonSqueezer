@@ -7,14 +7,10 @@ plugins {
 
 spotless {
     java {
-        toggleOffOn("@formatter:off", "@formatter:on")
-        palantirJavaFormat().style("AOSP")
-        indentWithSpaces(4)
-        trimTrailingWhitespace()
-        formatAnnotations()
-        removeUnusedImports()
         endWithNewline()
-        toggleOffOn()
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        targetExclude("build/generated/**/*")
     }
 
     kotlinGradle {
