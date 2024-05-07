@@ -1,7 +1,10 @@
-name: LemonSqueezerPaper
+name: LemonSqueezer
 version: '${version}'
-main: org.empirewar.lemonsqueezer.LemonSqueezerPaper
+main: org.empirewar.lemonsqueezer.paper.LemonSqueezerPaper
 api-version: 1.20
 description: Lemons for all!
 website: https://www.empirewar.org
 depend: ["LemonadeStand"]
+authors:
+  - SamB440
+  - StealWonders
