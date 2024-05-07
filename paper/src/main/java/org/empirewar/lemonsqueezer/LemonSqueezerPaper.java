@@ -16,14 +16,16 @@ import java.util.function.Function;
 
 public final class LemonSqueezerPaper extends JavaPlugin implements Listener {
 
-    private final Map<String, Function<KoFiTransactionEvent, String>> VARIABLE_MAPPINGS = new HashMap<>();
+    private final Map<String, Function<KoFiTransactionEvent, String>> VARIABLE_MAPPINGS =
+            new HashMap<>();
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
         Bukkit.getPluginManager().registerEvents(this, this);
         VARIABLE_MAPPINGS.put("player", event -> event.getPlayer().getName());
-        VARIABLE_MAPPINGS.put("amount", event -> String.valueOf(event.getShopOrder().getAmount()));
+        VARIABLE_MAPPINGS.put(
+                "amount", event -> String.valueOf(event.getShopOrder().getAmount()));
         VARIABLE_MAPPINGS.put("tier", event -> event.getShopOrder().getTierName());
     }
 
@@ -40,7 +42,9 @@ public final class LemonSqueezerPaper extends JavaPlugin implements Listener {
         if (shopOrder.getShopItems() != null && type.equals("Shop Order")) {
             for (ShopItem shopItem : shopOrder.getShopItems()) {
                 final String code = shopItem.getDirectLinkCode();
-                LemonadeStand.get().getTransactionLogger().info("Processing shop order item with code '" + code + "'.");
+                LemonadeStand.get()
+                        .getTransactionLogger()
+                        .info("Processing shop order item with code '" + code + "'.");
                 List<String> commands = getConfig().getStringList("purchase.shop." + code);
                 for (int i = 0; i < shopItem.getQuantity(); i++) {
                     processCommands(event, commands);
@@ -52,10 +56,16 @@ public final class LemonSqueezerPaper extends JavaPlugin implements Listener {
         // If they didn't buy any shop items, check if they bought a membership tier.
         final String tierName = shopOrder.getTierName();
         if (tierName != null) {
-            // Is this the first subscription? If so, we want the initial command set, otherwise the subsequent.
-            String subscriptionType = shopOrder.isFirstSubscriptionPayment() ? "initial" : "subsequent";
-            LemonadeStand.get().getTransactionLogger().info("Processing subscription for tier '" + tierName + "' of type '" + subscriptionType + "'.");
-            List<String> commands = getConfig().getStringList("purchase.membership." + tierName + "." + subscriptionType);
+            // Is this the first subscription? If so, we want the initial command set, otherwise the
+            // subsequent.
+            String subscriptionType =
+                    shopOrder.isFirstSubscriptionPayment() ? "initial" : "subsequent";
+            LemonadeStand.get()
+                    .getTransactionLogger()
+                    .info("Processing subscription for tier '" + tierName + "' of type '"
+                            + subscriptionType + "'.");
+            List<String> commands = getConfig()
+                    .getStringList("purchase.membership." + tierName + "." + subscriptionType);
             processCommands(event, commands);
             return;
         }
@@ -74,7 +84,9 @@ public final class LemonSqueezerPaper extends JavaPlugin implements Listener {
                 command = command.replace(varialised, apply == null ? "null" : apply);
             }
 
-            LemonadeStand.get().getTransactionLogger().info("Processing command '" + command + "'.");
+            LemonadeStand.get()
+                    .getTransactionLogger()
+                    .info("Processing command '" + command + "'.");
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command);
         }
     }

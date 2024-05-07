@@ -3,7 +3,6 @@ plugins {
     java
     id("io.github.goooler.shadow")
     id("com.diffplug.spotless")
-    id("net.kyori.indra.licenser.spotless")
 }
 
 spotless {
@@ -30,9 +29,10 @@ repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/") // Paper
     maven("https://repo.convallyria.com/snapshots/")
+    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
 }
 
-project.version = "1.0.0-SNAPSHOT"
+project.version = "1.0.1-SNAPSHOT"
 
 dependencies {
     constraints {
