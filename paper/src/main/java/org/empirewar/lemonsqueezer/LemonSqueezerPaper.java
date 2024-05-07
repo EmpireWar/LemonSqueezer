@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-public final class LemonSqueezer extends JavaPlugin implements Listener {
+public final class LemonSqueezerPaper extends JavaPlugin implements Listener {
 
     private final Map<String, Function<KoFiTransactionEvent, String>> VARIABLE_MAPPINGS = new HashMap<>();
 
