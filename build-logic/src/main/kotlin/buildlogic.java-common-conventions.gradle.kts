@@ -23,6 +23,7 @@ spotless {
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+    mavenLocal()
     maven("https://repo.papermc.io/repository/maven-public/") // Paper
     maven("https://repo.convallyria.com/snapshots/")
     maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
@@ -45,8 +46,6 @@ dependencies {
     testImplementation("net.kyori:adventure-api")
     compileOnly("org.joml:joml")
     testImplementation("org.joml:joml")
-    compileOnly("com.mojang:datafixerupper:6.0.8")
-    testImplementation("com.mojang:datafixerupper:6.0.8")
     compileOnly("com.google.code.gson:gson:2.10.1")
     testImplementation("com.google.code.gson:gson:2.10.1")
 }
