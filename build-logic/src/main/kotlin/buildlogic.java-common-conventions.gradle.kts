@@ -26,7 +26,6 @@ repositories {
     mavenLocal()
     maven("https://repo.papermc.io/repository/maven-public/") // Paper
     maven("https://repo.convallyria.com/snapshots/")
-    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
 }
 
 project.version = "1.0.1-SNAPSHOT"
@@ -36,14 +35,10 @@ dependencies {
         // Define dependency versions as constraints
         compileOnly("org.joml:joml:1.10.5")
         testImplementation("org.joml:joml:1.10.5")
-        compileOnly("net.kyori:adventure-api:4.16.0")
-        testImplementation("net.kyori:adventure-api:4.16.0")
     }
 
     compileOnly("org.spongepowered:configurate-yaml:4.1.2")
     testImplementation("org.spongepowered:configurate-yaml:4.1.2")
-    compileOnly("net.kyori:adventure-api")
-    testImplementation("net.kyori:adventure-api")
     compileOnly("org.joml:joml")
     testImplementation("org.joml:joml")
     compileOnly("com.google.code.gson:gson:2.10.1")
