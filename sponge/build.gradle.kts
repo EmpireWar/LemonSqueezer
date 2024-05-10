@@ -7,8 +7,10 @@ plugins {
 }
 
 dependencies {
-    compileOnly("org.empirewar.lemonadestand:LemonadeStand:1.0.0-SNAPSHOT")
-    implementation(project(":common"))
+    compileOnly("org.empirewar.lemonadestand:sponge-api:1.0.1-SNAPSHOT")
+    implementation(project(":common")) {
+        exclude("org.empirewar.lemonadestand")
+    }
 }
 
 sponge {
@@ -26,6 +28,11 @@ sponge {
         dependency("spongeapi") {
             loadOrder(PluginDependency.LoadOrder.AFTER)
             optional(false)
+        }
+        dependency("lemonadestand") {
+            loadOrder(PluginDependency.LoadOrder.AFTER)
+            optional(false)
+            version("*")
         }
         contributors {
             contributor("SamB440") {}
