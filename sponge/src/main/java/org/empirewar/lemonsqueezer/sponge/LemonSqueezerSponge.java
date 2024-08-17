@@ -100,7 +100,7 @@ public class LemonSqueezerSponge implements LemonSqueezer {
 
 	@Override
 	public LemonadeStand<?> lemonadeStand() {
-		return (LemonadeStand<?>) Sponge.pluginManager().plugin("lemonadestand").orElseThrow();
+		return (LemonadeStand<?>) Sponge.pluginManager().plugin("lemonadestand").orElseThrow().instance();
 	}
 
 	@Override
