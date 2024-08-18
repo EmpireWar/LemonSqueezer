@@ -45,7 +45,7 @@ public final class LemonSqueezerPaper extends JavaPlugin implements Listener, Le
     private void loadConfig() {
         try {
             final Path configPath = getDataFolder().toPath().resolve("config.yml");
-            saveResource("config.yml", false);
+            saveResource("assets/lemonsqueezer/config.yml", false);
 
             loader = YamlConfigurationLoader.builder().path(configPath).build();
             rootNode = loader.load();

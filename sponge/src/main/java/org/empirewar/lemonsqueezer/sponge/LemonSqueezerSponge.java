@@ -79,7 +79,7 @@ public class LemonSqueezerSponge implements LemonSqueezer {
 			final Path configPath = dataFolder.resolve("config.yml");
 			try {
 				Files.copy(
-						pluginContainer.openResource(URI.create("/config.yml")).orElseThrow(),
+						pluginContainer.openResource(URI.create("/assets/lemonsqueezer/config.yml")).orElseThrow(),
 						configPath);
 			} catch (FileAlreadyExistsException ignored) {
 			} catch (IOException e) {
